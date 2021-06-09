@@ -1,0 +1,37 @@
+{
+  "name": "parcel-project-template",
+  "version": "1.1.0",
+  "description": "",
+  "main": "index.js",
+  "homepage": "https://zombik007.github.io/goit-js-hw-12-countries",
+  "scripts": {
+    "dev": "parcel src/*.html",
+    "build": "parcel build src/*.html --public-url /parcel-project-template/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zombik007/goit-js-hw-12-countries.git"
+  },
+  "keywords": [],
+  "author": "Vitaliy Myts <myts.vitaliy@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zombik007/goit-js-hw-12-countries/issues"
+  },
+  "devDependencies": {
+    "@pnotify/core": "^5.2.0",
+    "parcel-bundler": "^1.12.5",
+    "parcel-plugin-handlebars-precompile": "^1.0.2",
+    "parcel-plugin-nuke-dist": "^1.0.1",
+    "posthtml-include": "^1.6.2",
+    "sass": "^1.32.8"
+  },
+  "dependencies": {
+    "@inventory/parcel-plugin-handlebars": "^1.0.0",
+    "@pnotify/mobile": "^5.2.0",
+    "handlebars": "^4.7.7",
+    "lodash.debounce": "^4.0.8",
+    "parcel-plugin-handlebars": "^0.4.4",
+    "parcel-plugin-hbs": "^1.1.2"
+  }
+}
