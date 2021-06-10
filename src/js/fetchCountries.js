@@ -1,49 +1,21 @@
-import debounce from 'lodash.debounce';
-import countryCardTpl from '../templates/country-card.hbs';
-import countryListTpl from '../templates/country-list.hbs';
-import { error } from '@pnotify/core/dist/PNotify.js';
+const BASE_URL = 'https://restcountries.eu';
 
-const refs = {
-  nameInputField: document.querySelector('.js-input-country-name'),
-  countruesRenderCard: document.querySelector('.js-render-result'),
-};
+export default class CountryApiService {
+  constructor() {
+    this.seachQuery = '';
+  }
 
-function fetchCountries(searchQuery) {
-  return fetch(`https://restcountries.eu/rest/v2/name/${searchQuery}`).then(response => {
-    return response.json();
-  });
-}
-
-function renderCountries(countries) {
-  if (countries.length > 10) {
-    error({
-      title: 'Too many matches found. Please enter a more specific query!',
+  fetchCountryApi() {
+    return fetch(`${BASE_URL}/rest/v2/name/${this.searchQuery}`).then(response => {
+      return response.json();
     });
-    refs.countruesRenderCard.innerHTML = '';
-    console.log('Too many matches found. Please enter a more specific query!');
-  } else if (countries.length >= 2 && countries.length <= 10) {
-    const markup = countryListTpl(countries);
-    refs.countruesRenderCard.innerHTML = markup;
-  } else {
-    const markup = countryCardTpl(countries);
-    refs.countruesRenderCard.innerHTML = markup;
   }
-}
 
-refs.nameInputField.addEventListener('input', debounce(onNameInput, 500));
-
-function onNameInput(e) {
-  e.preventDefault();
-  const countriesQuery = e.target.value.trim();
-  fetchCountries(countriesQuery).then(renderCountries).catch(onFetchError);
-  if (e.target.value === '') {
-    refs.countruesRenderCard.innerHTML = '';
+  get query() {
+    return this.searchQuery;
   }
-  console.log(e.target.value.trim());
-}
 
-function onFetchError(err) {
-  error({
-    title: 'Search error. Please start typing the country name',
-  });
+  set query(newQuery) {
+    this.searchQuery = newQuery;
+  }
 }
